@@ -6,3 +6,6 @@ class Song(models.Model):
     composer = models.CharField(max_length=200)
     period = models.CharField(max_length=100)
     multipart = models.BooleanField()
+
+    def __str__(self):
+        return self.name

@@ -1,19 +1,5 @@
 from django.shortcuts import render
-
-# # Class Instantiation
-# class Song:  # Note that parens are optional if not inheriting from another class
-#   def __init__(self, name, composer, period, multipart):
-#     self.name = name
-#     self.composer = composer
-#     self.period = period
-#     self.multipart = multipart
-
-# songs = [
-#   Song('Sonata No. 1 in C', 'Mozart', 'classical', True),
-#   Song('Pathétique Sonata', 'Beethoven', 'classical', True),
-#   Song('Fugue No 2 from Well-Tempered Clavier', 'Bach', 'Baroque', False)
-# ]
-
+from .models import Song
 
 # Create your views here.
 def home(request):
@@ -23,4 +9,9 @@ def about(request):
   return render(request, 'about.html')
 
 def songs_index(request):
-  return render(request, 'songs/index.html', { 'songs': songs })
+  songs = Song.objects.all()
+  return render(request, 'songs/index.html', {'songs': songs})
+  
+def songs_detail(request, song_id):
+  song = Song.objects.get(id=song_id)
+  return render(request, 'songs/detail.html', {'song': song})
