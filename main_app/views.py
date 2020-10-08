@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Song
+from .forms import PerformanceForm
 
 # Create your views here.
 def home(request):
@@ -15,7 +16,16 @@ def songs_index(request):
   
 def songs_detail(request, song_id):
   song = Song.objects.get(id=song_id)
-  return render(request, 'songs/detail.html', {'song': song})
+  performance_form = PerformanceForm()
+  return render(request, 'songs/detail.html', {'song': song, 'performance_form': performance_form})
+  
+  def add_performance(request, song_id):
+    form = PerformanceForm(request.POST)
+    if form.is_valid():
+      new_performance = form.save(commit=False)
+      new_performance.song_id = song_id
+      new_performance.save()
+    return redirect('detail', song_id = song_id)
 
 class SongCreate(CreateView):
   model = Song
