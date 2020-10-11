@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Book Details</h1>
+<div class="row">
+    <div class="col s6 col-offset-3">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ book.name }}</span>
+                <p>Publisher: {{ book.publisher }}</p>
+                <p>Author/Arranger/Composer: {{ book.author }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'books_update' book.id %}">Edit</a>
+                <a href="{% url 'books_delete' book.id %}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -10,11 +10,6 @@
             <span class="card-title">{{ song.name }}</span>
             <p>Composer: {{ song.composer }}</p>
             <p>Period: {{ song.period }}</p>
-            {% if song.multipart == True %}
-            <p>This piece has multiple movements</p>
-            {% else %}
-            <p>This piece is a standalone piece</p>
-            {% endif %}
         </div>
     </a>
 </div>
